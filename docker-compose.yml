@@ -1,0 +1,16 @@
+version: '3'
+services:
+  broker:
+    image: rabbitmq:management
+    ports:
+    - "15672:15672"
+    - "5672:5672"
+    hostname: "dcga_broker"
+  master:
+    build: master/
+    environment:
+    - BROKER_HOST=broker
+  slave:
+    build: slave/
+    environment:
+    - BROKER_HOST=broker
